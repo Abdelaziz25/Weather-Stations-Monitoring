@@ -31,8 +31,9 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
-            <version>3.1.0</version> <!-- Replace with the version you want to use -->
+            <version>3.7.0</version> <!-- Replace with the version you want to use -->
         </dependency>
+
     </dependencies>
 
     <properties>
