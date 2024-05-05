@@ -1,4 +1,4 @@
-package WeatherStation;
+package DataAcquisition;
 
 import org.json.JSONObject;
 
