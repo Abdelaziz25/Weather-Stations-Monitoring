@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "WeatherData",
+  "namespace": "com.example",
+  "fields": [
+    {"name": "station_id", "type": "int"},
+    {"name": "s_no", "type": "int"},
+    {
+      "name": "weather",
+      "type": {
+        "type": "record",
+        "name": "WeatherInfo",
+        "fields": [
+          {"name": "temperature", "type": "int"},
+          {"name": "humidity", "type": "int"},
+          {"name": "wind_speed", "type": "int"}
+        ]
+      }
+    },
+    {"name": "status_timestamp", "type": "long"},
+    {"name": "battery_status", "type": "string"}
+  ]
+}
