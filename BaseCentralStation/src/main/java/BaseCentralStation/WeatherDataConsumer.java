@@ -32,8 +32,11 @@ public class WeatherDataConsumer {
     private static final int BATCH_SIZE = 100;
 
     public static void main(String[] args) throws IOException {
+        String projectDir = System.getProperty("user.dir");
+        String avroSchemaFilePath = projectDir + "/src/main/java/BaseCentralStation/weather_record.avsc";
+
         Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:55750");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "weather-data-consumer-group");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
@@ -41,7 +44,7 @@ public class WeatherDataConsumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList("Lab4"));
 
-        Schema avroSchema = new Schema.Parser().parse(new File("src/main/java/BaseCentralStation/weather_record.avsc"));
+        Schema avroSchema = new Schema.Parser().parse(new File(avroSchemaFilePath));
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", "file:///");
 
@@ -59,11 +62,13 @@ public class WeatherDataConsumer {
                     GenericRecord avroRecord = createAvroRecord(record.value(), avroSchema);
                     recordsBatch.add(avroRecord);
                     recordCount++;
+                    System.out.println(record.value());
                     System.out.println(recordCount);
                     if (recordCount >= BATCH_SIZE) {
                         // Write the batch to a Parquet file
                         if (outputFile == null) {
-                            outputFile = HadoopOutputFile.fromPath(new Path("C:\\Users\\abdel\\Desktop\\Project" + fileIndex + ".parquet"), conf);
+                            String parquetFilePath = projectDir + "/Project" + fileIndex + ".parquet";
+                            outputFile = HadoopOutputFile.fromPath(new Path(parquetFilePath), conf);
                             fileIndex++;
                             parquetWriter = AvroParquetWriter.<GenericRecord>builder(outputFile)
                                     .withSchema(avroSchema)
@@ -71,6 +76,7 @@ public class WeatherDataConsumer {
                                     .build();
                         }
                         for (GenericRecord batchRecord : recordsBatch) {
+
                             parquetWriter.write(batchRecord);
                         }
                         recordsBatch.clear();

@@ -1,7 +1,7 @@
 FROM maven:3.9.2-eclipse-temurin-17-alpine
 
 WORKDIR /CentralServer
-
+EXPOSE 8080
 # Copy the Maven project files into the Docker container
 COPY src ./src
 COPY pom.xml .
