@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: centralserver
+  labels:
+    app: centralserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: centralserver
+  template:
+    metadata:
+      labels:
+        app: centralserver
+    spec:
+      containers:
+        - name: centralserver
+          image: abdelaziz89/central-server:v1.0
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafkaprocessor
+  labels:
+    app: kafkaprocessor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafkaprocessor
+  template:
+    metadata:
+      labels:
+        app: kafkaprocessor
+    spec:
+      containers:
+        - name: centralserver
+          image: abdelaziz89/kafka-processor:v1.0
+          ports:
+            - containerPort: 8080

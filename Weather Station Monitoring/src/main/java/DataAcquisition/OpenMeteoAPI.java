@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class OpenMeteoAPI {
     private static final String OPEN_METEO_API_URL = "https://api.open-meteo.com/weather";
@@ -37,6 +38,7 @@ public class OpenMeteoAPI {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
+                System.out.println("aaa");
                 // Check response code
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -70,10 +72,13 @@ public class OpenMeteoAPI {
                             if (!(random.nextDouble() <= 0.1)) {
                                 JSONObject kafkaMessage = WeatherMessageBuilder.buildWeatherMessage(StationId, i+1, relativeHumidity, windSpeed, temperature, time);
                                 System.out.println(kafkaMessage);
-                                kafkaProducer.send(new ProducerRecord<>("Lab4", kafkaMessage.toString()));
+                                System.out.println(kafkaProducer.send(new ProducerRecord<>("Project", "1","1")));
+                                System.out.println("vvvvvv");
+                                kafkaProducer.flush();
                             }
                             try {
-                                Thread.sleep(1000);
+                                TimeUnit.SECONDS.sleep(1);
+
                             } catch (InterruptedException e) {
                                 e.getCause();
                             }
