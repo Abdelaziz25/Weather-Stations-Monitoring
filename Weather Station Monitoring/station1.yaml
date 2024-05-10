@@ -19,3 +19,10 @@ spec:
           image: abdelaziz89/weather:v1.0
           ports:
             - containerPort: 8080
+          env:
+            - name: StationId
+              value: "1"
+            - name: latitude
+              value: "31.2018"
+            - name: longitude
+              value: "29.9158"

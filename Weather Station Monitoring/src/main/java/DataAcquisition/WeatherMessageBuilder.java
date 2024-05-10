@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import java.util.Random;
 
 public class WeatherMessageBuilder {
-    // Random generator for battery status
 
     // Method to build weather message with specified attributes
     public static JSONObject buildWeatherMessage(int stationId, int sNo, int relativeHumidity, int windSpeed, int temperature, long time) {
