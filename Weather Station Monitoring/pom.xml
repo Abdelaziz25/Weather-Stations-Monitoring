@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>weather-station-monitoring</artifactId>
-
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -86,6 +86,19 @@
         <maven.compiler.target>11</maven.compiler.target>
         <parquet.version>1.12.0</parquet.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <mainClass>DataAcquisition.Main</mainClass> <!-- Replace with your main class -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

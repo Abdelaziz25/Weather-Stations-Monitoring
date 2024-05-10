@@ -41,7 +41,7 @@ public class WeatherDataConsumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList("Lab4"));
 
-        Schema avroSchema = new Schema.Parser().parse(new File("C:\\Users\\abdel\\Desktop\\Connect-4\\Weather-Stations-Monitoring\\Weather Station Monitoring\\src\\main\\java\\BaseCentralStation\\weather_record.avsc"));
+        Schema avroSchema = new Schema.Parser().parse(new File("src/main/java/BaseCentralStation/weather_record.avsc"));
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", "file:///");
 

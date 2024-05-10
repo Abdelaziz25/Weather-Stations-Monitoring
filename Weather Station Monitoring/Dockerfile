@@ -1,25 +1,11 @@
-# Use the openjdk:11 image as the base image
-FROM openjdk:11
+FROM maven:3.9.2-eclipse-temurin-17-alpine
+EXPOSE 8080
 
-# Install Maven
-RUN apt-get update && \
-    apt-get -y install maven && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /dataAcquisition
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the Maven project files to the Docker image
+COPY src ./src
 COPY pom.xml .
 
-# Download dependencies
-RUN mvn dependency:go-offline
+RUN mvn clean install
 
-# Copy the source code
-COPY src ./src
-
-# Build the Maven project
-RUN mvn package
-
-# Specify the command to run your application
-CMD ["java", "-jar", "target/Weather-Station-1.0.jar"]
+CMD ["mvn","exec:java"]

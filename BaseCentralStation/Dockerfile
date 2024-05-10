@@ -1,25 +1,16 @@
-# Use the openjdk:11 image as the base image
-FROM openjdk:11
+FROM maven:3.9.2-eclipse-temurin-17-alpine
 
-# Install Maven
-RUN apt-get update && \
-    apt-get -y install maven && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /CentralServer
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the Maven project files to the Docker image
+# Copy the Maven project files into the Docker container
+COPY src ./src
 COPY pom.xml .
 
-# Download dependencies
-RUN mvn dependency:go-offline
+# Copy the Avro schema file into the Docker container
+COPY src/main/java/BaseCentralStation/weather_record.avsc /CentralServer/src/main/java/BaseCentralStation/weather_record.avsc
 
-# Copy the source code
-COPY src ./src
+# Build the Maven project inside the Docker container
+RUN mvn clean install
 
-# Build the Maven project
-RUN mvn package
-
-# Specify the command to run your application
-CMD ["java", "-jar", "target/Weather-Station-1.0.jar"]
+# Specify the command to run your Java application
+CMD ["mvn", "exec:java"]
