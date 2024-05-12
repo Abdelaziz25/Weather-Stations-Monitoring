@@ -1,6 +1,8 @@
 package Entries;
 
-import java.io.Serializable;
+import Converter.TypesConverter;
+
+import java.io.*;
 import java.util.Arrays;
 
 public class BitCaskEntry  implements Serializable {
@@ -10,13 +12,15 @@ public class BitCaskEntry  implements Serializable {
     private byte [] key;
     private byte [] value;
 
+    private TypesConverter converter;
 
-    public BitCaskEntry(byte [] key, byte [] value, int keyLength, int valueLength, long timeStamp){
+    public BitCaskEntry( long timeStamp ,  int keyLength, int valueLength, byte [] key, byte [] value){
         this.key = key;
         this.value = value;
         this.keyLength = keyLength;
         this.valueLength = valueLength;
         this.timeStamp = timeStamp;
+        this.converter = new TypesConverter();
     }
 
     public int getEntrySize(){
@@ -28,6 +32,17 @@ public class BitCaskEntry  implements Serializable {
 
         return size;
     }
+
+    public byte[] toByteArray() throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byteArrayOutputStream.write(this.converter.longToBytes(this.timeStamp));
+        byteArrayOutputStream.write(this.converter.intToBytes(this.keyLength));
+        byteArrayOutputStream.write(this.converter.intToBytes(this.valueLength));
+        byteArrayOutputStream.write(this.key);
+        byteArrayOutputStream.write(this.value);
+        return byteArrayOutputStream.toByteArray();
+    }
+
 
     public byte[] getKey() {
         return key;
@@ -59,4 +74,5 @@ public class BitCaskEntry  implements Serializable {
                 ", value=" + Arrays.toString(value) +
                 '}';
     }
+
 }

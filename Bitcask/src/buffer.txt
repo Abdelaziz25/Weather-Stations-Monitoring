@@ -1,0 +1,15 @@
+
+Class BitCaskEntry
+//    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+//        this.timeStamp = in.readLong();
+//        this.keyLength = in.readInt();
+//        this.valueLength = in.readInt();
+//
+//        byte[] keyBytes = new byte[this.keyLength];
+//        in.readFully(keyBytes,16,keyLength);
+//        this.key = keyBytes;
+//
+//        byte[] valueBytes = new byte[this.valueLength];
+//        in.readFully(valueBytes,16+keyLength,valueLength);
+//        this.value = valueBytes;
+//    }
