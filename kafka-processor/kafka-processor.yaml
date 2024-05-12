@@ -15,7 +15,7 @@ spec:
         app: kafkaprocessor
     spec:
       containers:
-        - name: centralserver
-          image: abdelaziz89/kafka-processor:v1.0
+        - name: kafkaprocessor
+          image: abdelaziz89/kafkaprocessor:v1.0
           ports:
             - containerPort: 8080

@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: station1
+  name: station4
   labels:
-    app: station1
+    app: station4
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: station1
+      app: station4
   template:
     metadata:
       labels:
-        app: station1
+        app: station4
     spec:
       containers:
-        - name: station1
+        - name: station4
           image: abdelaziz89/weather-station:v1.0
           ports:
             - containerPort: 8080
           env:
             - name: StationId
-              value: "1"
+              value: "4"
             - name: latitude
-              value: "31.2018"
+              value: "30.5148"
             - name: longitude
-              value: "29.9158"
+              value: "30.3436"

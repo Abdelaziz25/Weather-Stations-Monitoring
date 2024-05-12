@@ -18,7 +18,7 @@ public class RainTriggerDetectionApp {
     public static void main(String[] args) {
         Properties config = new Properties();
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "rain-trigger-app");
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://localhost:52655/");
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-release.kafka:9092");
 
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
@@ -26,7 +26,7 @@ public class RainTriggerDetectionApp {
         StreamsBuilder builder = new StreamsBuilder();
 
         // Add Kafka Streams processing topology
-        KStream<String, String> weatherStream = builder.stream("Lab4", Consumed.with(Serdes.String(), Serdes.String()));
+        KStream<String, String> weatherStream = builder.stream("Project", Consumed.with(Serdes.String(), Serdes.String()));
 
         weatherStream.filter((key, value) -> isRaining(value))
                 .to("rain-triggers", Produced.with(Serdes.String(), Serdes.String()));

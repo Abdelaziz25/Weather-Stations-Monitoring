@@ -37,8 +37,6 @@ public class OpenMeteoAPI {
                 URL url = new URL(apiUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
-
-                System.out.println("aaa");
                 // Check response code
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -67,18 +65,15 @@ public class OpenMeteoAPI {
                             int windSpeed = windSpeedArray.getInt(i);
                             int temperature = temperatureArray.getInt(i);
                             long time = timeArray.getLong(i); // Assuming time is in Unix timestamp format
-
                             // Publish message to Kafka
                             if (!(random.nextDouble() <= 0.1)) {
                                 JSONObject kafkaMessage = WeatherMessageBuilder.buildWeatherMessage(StationId, i+1, relativeHumidity, windSpeed, temperature, time);
                                 System.out.println(kafkaMessage);
-                                System.out.println(kafkaProducer.send(new ProducerRecord<>("Project", "1","1")));
-                                System.out.println("vvvvvv");
+                                kafkaProducer.send(new ProducerRecord<>("Project", Integer.toString(StationId),kafkaMessage.toString()));
                                 kafkaProducer.flush();
                             }
                             try {
                                 TimeUnit.SECONDS.sleep(1);
-
                             } catch (InterruptedException e) {
                                 e.getCause();
                             }
