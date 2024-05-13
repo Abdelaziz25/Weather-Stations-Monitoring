@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class WeatherDataConsumer {
-    private static final int BATCH_SIZE = 1000;
+    private static final int BATCH_SIZE = 100;
 
     public static void main(String[] args) throws IOException {
         String projectDir = System.getProperty("user.dir");
@@ -45,13 +45,11 @@ public class WeatherDataConsumer {
         consumer.subscribe(Collections.singletonList("Project"));
 
         Schema avroSchema = new Schema.Parser().parse(new File(avroSchemaFilePath));
-        Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "file:///");
 
         List<GenericRecord> recordsBatch = new ArrayList<>();
         int recordCount = 0;
         int fileIndex = 0;
-        HadoopOutputFile outputFile = null;
+
         ParquetWriter<GenericRecord> parquetWriter = null;
 
         try {
@@ -64,35 +62,39 @@ public class WeatherDataConsumer {
                     recordCount++;
                     System.out.println(record.value());
                     System.out.println(recordCount);
+                    System.out.println("here");
                     if (recordCount >= BATCH_SIZE) {
                         // Write the batch to a Parquet file
-                        if (outputFile == null) {
-                            String parquetFilePath = projectDir + "/Project" + fileIndex + ".parquet";
-                            outputFile = HadoopOutputFile.fromPath(new Path(parquetFilePath), conf);
-                            fileIndex++;
-                            parquetWriter = AvroParquetWriter.<GenericRecord>builder(outputFile)
+                        String outputDirectory = "files";
+                        String parquetFilePath = outputDirectory + "/Project" + fileIndex + ".parquet";
+                        Path path = new Path(parquetFilePath);
+                        fileIndex++;
+                        if (parquetWriter == null) {
+                            parquetWriter = AvroParquetWriter.<GenericRecord>builder(path)
                                     .withSchema(avroSchema)
                                     .withCompressionCodec(CompressionCodecName.SNAPPY)
                                     .build();
                         }
-                        for (GenericRecord batchRecord : recordsBatch) {
-
-                            parquetWriter.write(batchRecord);
+                        try {
+                            for (GenericRecord batchRecord : recordsBatch) {
+                                parquetWriter.write(batchRecord);
+                            }
+                        } catch (IOException e) {
+                            System.out.println("llll");
+                            System.out.println(e);
+                            e.printStackTrace();
+                            // Optionally handle the exception, e.g., skip the batch
+                        } finally {
+                            recordsBatch.clear();
+                            recordCount = 0;
                         }
-                        recordsBatch.clear();
-                        recordCount = 0;
-                        if (parquetWriter != null) {
-                            parquetWriter.close(); // Close Parquet writer
-                            parquetWriter = null;
-                        }
-                        outputFile = null;
                     }
                 }
             }
         } finally {
             consumer.close();
             if (parquetWriter != null) {
-                parquetWriter.close();
+                parquetWriter.close(); // Close Parquet writer outside the loop
             }
         }
     }

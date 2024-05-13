@@ -15,7 +15,15 @@ spec:
         app: centralserver
     spec:
       containers:
-        - name: centralserver
-          image: abdelaziz89/central-server:v1.0
+        - name: newserver
+          image: abdelaziz89/servereses:v1.0
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: parquet
+              mountPath: /files
+              subPath: files
+      volumes:
+        - name: parquet
+          persistentVolumeClaim:
+            claimName: serverstorage
