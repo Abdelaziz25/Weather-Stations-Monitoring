@@ -1,0 +1,105 @@
+/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -javaagent:/snap/intellij-idea-ultimate/493/lib/idea_rt.jar=34415:/snap/intellij-idea-ultimate/493/bin -Dfile.encoding=UTF-8 -classpath /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/out/production/Bitcask Main
+Number of Hint Files = 0
+No hint files found it's a new Start
+Successfully Started BitCask
+writeToActiveFile a entry of size = 24
+write at pos = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715697076889, keyLength=4, valueLength=4, key=[107, 101, 121, 49], value=[118, 97, 108, 49]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=0, valueSize=4, timeStamp=1715697076889}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715697076889, keySize=4, valueSize=4, valuePosition=0, key=[107, 101, 121, 49]}
+writeToActiveFile a entry of size = 24
+write at pos = 24
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715697076965, keyLength=4, valueLength=4, key=[107, 101, 121, 50], value=[118, 97, 108, 50]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=24, valueSize=4, timeStamp=1715697076965}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715697076965, keySize=4, valueSize=4, valuePosition=24, key=[107, 101, 121, 50]}
+writeToActiveFile a entry of size = 24
+write at pos = 48
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715697076966, keyLength=4, valueLength=4, key=[107, 101, 121, 51], value=[118, 97, 108, 51]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=48, valueSize=4, timeStamp=1715697076966}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715697076966, keySize=4, valueSize=4, valuePosition=48, key=[107, 101, 121, 51]}
+writeToActiveFile a entry of size = 24
+write at pos = 72
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715697076967, keyLength=4, valueLength=4, key=[107, 101, 121, 52], value=[118, 97, 108, 52]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=72, valueSize=4, timeStamp=1715697076967}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715697076967, keySize=4, valueSize=4, valuePosition=72, key=[107, 101, 121, 52]}
+Key Directory Contents:
+Key: [107, 101, 121, 49]
+Value: KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=0, valueSize=4, timeStamp=1715697076889}
+Key: [107, 101, 121, 52]
+Value: KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=72, valueSize=4, timeStamp=1715697076967}
+Key: [107, 101, 121, 50]
+Value: KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=24, valueSize=4, timeStamp=1715697076965}
+Key: [107, 101, 121, 51]
+Value: KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=48, valueSize=4, timeStamp=1715697076966}
+End of Key Directory Contents
+readFromFile a file src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 49]
+readFromFile a file src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 50]
+readFromFile a file src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 51]
+readFromFile a file src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 52]
+Key not found
+
+Process finished with exit code 0
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -javaagent:/snap/intellij-idea-ultimate/493/lib/idea_rt.jar=46489:/snap/intellij-idea-ultimate/493/bin -Dfile.encoding=UTF-8 -classpath /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/out/production/Bitcask Main
+Number of Hint Files = 1
+/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile.hint
+Constructing From File /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile.hint
+Read from hint file at position 0
+Successfully reading hint entry HintFileEntry{tstamp=1715697076889, keySize=4, valueSize=4, valuePosition=0, key=[107, 101, 121, 49]}
+ Next Reading Position 28
+First time reading hint entry HintFileEntry{tstamp=1715697076889, keySize=4, valueSize=4, valuePosition=0, key=[107, 101, 121, 49]}
+
+Read from hint file at position 28
+Successfully reading hint entry HintFileEntry{tstamp=1715697076965, keySize=4, valueSize=4, valuePosition=24, key=[107, 101, 121, 50]}
+ Next Reading Position 56
+First time reading hint entry HintFileEntry{tstamp=1715697076965, keySize=4, valueSize=4, valuePosition=24, key=[107, 101, 121, 50]}
+
+Read from hint file at position 56
+Successfully reading hint entry HintFileEntry{tstamp=1715697076966, keySize=4, valueSize=4, valuePosition=48, key=[107, 101, 121, 51]}
+ Next Reading Position 84
+First time reading hint entry HintFileEntry{tstamp=1715697076966, keySize=4, valueSize=4, valuePosition=48, key=[107, 101, 121, 51]}
+
+Read from hint file at position 84
+Successfully reading hint entry HintFileEntry{tstamp=1715697076967, keySize=4, valueSize=4, valuePosition=72, key=[107, 101, 121, 52]}
+ Next Reading Position 112
+First time reading hint entry HintFileEntry{tstamp=1715697076967, keySize=4, valueSize=4, valuePosition=72, key=[107, 101, 121, 52]}
+
+Key Directory after reading hint file >> /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile.hint
+Key Directory Contents:
+Key: [107, 101, 121, 49]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=0, valueSize=4, timeStamp=1715697076889}
+Key: [107, 101, 121, 52]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=72, valueSize=4, timeStamp=1715697076967}
+Key: [107, 101, 121, 50]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=24, valueSize=4, timeStamp=1715697076965}
+Key: [107, 101, 121, 51]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=48, valueSize=4, timeStamp=1715697076966}
+End of Key Directory Contents
+Current Active File >> /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile
+Counter >> 0
+Key Directory Contents:
+Key: [107, 101, 121, 49]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=0, valueSize=4, timeStamp=1715697076889}
+Key: [107, 101, 121, 52]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=72, valueSize=4, timeStamp=1715697076967}
+Key: [107, 101, 121, 50]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=24, valueSize=4, timeStamp=1715697076965}
+Key: [107, 101, 121, 51]
+Value: KeyDirectoryEntry{fileId='/home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile', valuePosition=48, valueSize=4, timeStamp=1715697076966}
+End of Key Directory Contents
+readFromFile a file /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 49]
+readFromFile a file /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 50]
+readFromFile a file /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 51]
+readFromFile a file /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/src/Storage/activeFile of size = 4
+Successfully Returned Value [118, 97, 108, 52]
+Key not found
+
+Process finished with exit code 0

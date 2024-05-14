@@ -10,18 +10,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ActiveFileHandler {
-    private final int MAX_SIZE = 500;
+    private final int MAX_SIZE = 200;
     private RandomAccessFile activeFile;
     private String activeFilePath;
     private long nextFilePosition;
     static private int fileCounter;
     private TypesConverter converter;
-    private boolean debug = false;
+    private boolean debug = true;
 
-    public ActiveFileHandler() throws IOException {
+    public ActiveFileHandler(String activePath , int counter) throws IOException {
         this.converter = new TypesConverter();
-        this.fileCounter = 0;
-        this.activeFilePath = "src/Storage/activeFile";
+
+        if (activePath == null || activePath.isEmpty()) {
+            this.activeFilePath = "src/Storage/activeFile"; // Default active file path
+        } else {
+            this.activeFilePath = activePath;
+        }
+
+        this.fileCounter = counter;
         initActiveFile(this.activeFilePath);
     }
 
@@ -37,7 +43,7 @@ public class ActiveFileHandler {
         this.activeFilePath = activeFilePath+String.valueOf(fileCounter++);
         initActiveFile(this.activeFilePath);
 
-        if(debug) System.out.println("ADD NEW ACTIVE FILE "+ this.activeFilePath);
+        if(debug) System.out.println("ADD NEW ACTIVE FILE "+ this.activeFilePath + "File write position = "+this.nextFilePosition);
     }
 
     private void checkForPossibleNewActiveFile(int addedEntryLength) throws IOException {
@@ -56,6 +62,7 @@ public class ActiveFileHandler {
             System.out.println("writeToActiveFile a entry of size = "+entry.getEntrySize());
             System.out.println("write at pos = "+this.nextFilePosition);
         }
+
         checkForPossibleNewActiveFile(entry.getEntrySize());
         this.activeFile.seek(this.nextFilePosition);
         this.activeFile.write(entry.toByteArray());
@@ -64,6 +71,8 @@ public class ActiveFileHandler {
         this.nextFilePosition = this.activeFile.getFilePointer();    // Update nextFilePosition for the next write
         return filePosition;
     }
+
+
 
     public byte[] getFromActiveFile(String filePath, long valuePosition , int valueSize) throws IOException, ClassNotFoundException {
         if(debug) System.out.println("readFromFile a file " + filePath + " of size = "+valueSize);

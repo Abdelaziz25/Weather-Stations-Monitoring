@@ -21,4 +21,9 @@ public class TypesConverter {
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         return buffer.getInt();
     }
+
+    public long byteArrayToLong(byte[] bytes) {
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        return buffer.getLong();
+    }
 }

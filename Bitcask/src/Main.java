@@ -9,57 +9,69 @@ public class Main {
         ConsolePrinter cp =  new ConsolePrinter();
         BitCask bitcask = new BitCask();
 
-        // Example key and value byte arrays
-        byte[] key1 = {0x12, 0x34, (byte) 0xAB, (byte) 0xCD}; // Byte array for key
-        byte[] value1 = "Heo".getBytes(); // Byte array for value (string converted to bytes)
+        bitcask.start();
 
-        byte[] key2 = {0x56, 0x78, (byte) 0xEF, (byte) 0x01}; // Another example key
-        byte[] value2 = {0x41, 0x42, 0x43, 0x44, 0x45}; // Another example value (sequence of bytes)
+        byte[] key1 = "key1".getBytes();
+        byte[] value1 = "val1".getBytes();
 
-        byte[] key3 = {0x56, 0x78, (byte) 0xEF, (byte) 0x01};
-        byte[] value3 = {0x41, 0x42, 0x43, 0x44, 0x45};
+        byte[] key2 = "key2".getBytes();
+        byte[] value2 = "val2".getBytes();
 
-        byte[] key4 = {0x56, 0x78, (byte) 0xEF, (byte) 0x01};
-        byte[] value4 = {0x41, 0x42, 0x43, 0x44, 0x45 , 0x51, 0x56, 0x78};
+        byte[] key3 = "key3".getBytes();
+        byte[] value3 = "val3".getBytes();
 
-
-        bitcask.put(key1 , value4);
-        bitcask.put(key2 , value3);
-        bitcask.put(key3 , value2);
-        bitcask.put(key4 , value1);
+        byte[] key4 = "key4".getBytes();
+        byte[] value4 = "val4".getBytes();
 
 
-        System.out.println(bitcask.get(key1));
-        bitcask.get("hhhhhhhhhhhhhhhh".getBytes());
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key2 , value2);
+//        bitcask.put(key3 , value3);
+//        bitcask.put(key4 , value4);
 
-
-        bitcask.put(key1 , value1);
-        bitcask.put(key2, value2);
-        bitcask.put(key3 , value3);
-        bitcask.put(key4 , value4);
-
-
-        bitcask.put(key1 , value1);
-        bitcask.put(key1 , value2);
-        bitcask.put(key1 , value3);
-
-
-        System.out.println("Key Directory >>>>");
         cp.printKeyDirectory(bitcask.getKeyDir());
-        System.out.println("-------------------------------------------------------------------------------------------------------------");
+
+        bitcask.get(key1);
+        bitcask.get(key2);
+        bitcask.get(key3);
+        bitcask.get(key4);
+        bitcask.get("mfesssh".getBytes());
 
 
-//        bitcask.compact();
+
+//        bitcask.start();
+
+//        bitcask.get(key1);
+//        bitcask.get("laaaaaaaaa".getBytes());
 
 
-
-
-//        cp.printKeyDirectory(bitcask.getKeyDir());
+//        System.out.println(bitcask.get(key1));
+//        bitcask.get("hhhhhhhhhhhhhhhh".getBytes());
 //
-//        bitcask.get(key1);
+//
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key2, value2);
+//        bitcask.put(key3 , value3);
+//        bitcask.put(key4 , value4);
 
-//        bitcask.get(key1);
-//        bitcask.get(key2);
+
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key1 , value2);
+//        bitcask.put(key1 , value3);
+//
+//
+//        System.out.println("Key Directory >>>>");
+//        cp.printKeyDirectory(bitcask.getKeyDir());
+//        System.out.println("-------------------------------------------------------------------------------------------------------------");
+//
+//
+////        bitcask.compact();
+////        cp.printKeyDirectory(bitcask.getKeyDir());
+////
+////        bitcask.get(key1);
+//
+////        bitcask.get(key1);
+////        bitcask.get(key2);
 
     }
 }

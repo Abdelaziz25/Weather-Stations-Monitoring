@@ -4,6 +4,7 @@ import Converter.TypesConverter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class HintFileEntry {
     private long tstamp;
@@ -23,13 +24,34 @@ public class HintFileEntry {
         this.converter = new TypesConverter();
     }
 
+    public int getEntrySize(){
+        int size = Long.BYTES + Integer.BYTES + Integer.BYTES + Long.BYTES;
+        if (key != null)    size += key.length;
+        return size;
+    }
+
+
     public byte[] toByteArray() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byteArrayOutputStream.write(this.converter.longToBytes(this.tstamp));
         byteArrayOutputStream.write(this.converter.intToBytes(this.keySize));
         byteArrayOutputStream.write(this.converter.intToBytes(this.valueSize));
+        byteArrayOutputStream.write(this.converter.longToBytes(this.valuePosition));
         byteArrayOutputStream.write(this.key);
         return byteArrayOutputStream.toByteArray();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("HintFileEntry{");
+        sb.append("tstamp=").append(tstamp);
+        sb.append(", keySize=").append(keySize);
+        sb.append(", valueSize=").append(valueSize);
+        sb.append(", valuePosition=").append(valuePosition);
+        sb.append(", key=").append(Arrays.toString(key)); // Assuming key is a byte array representing a string
+        sb.append('}');
+        return sb.toString();
     }
 
 
@@ -54,23 +76,5 @@ public class HintFileEntry {
         return valuePosition;
     }
 
-    public void setTstamp(long tstamp) {
-        this.tstamp = tstamp;
-    }
 
-    public void setKeySize(int keySize) {
-        this.keySize = keySize;
-    }
-
-    public void setValueSize(int valueSize) {
-        this.valueSize = valueSize;
-    }
-
-    public void setValuePosition(long valuePosition) {
-        this.valuePosition = valuePosition;
-    }
-
-    public void setKey(byte[] key) {
-        this.key = key;
-    }
 }
