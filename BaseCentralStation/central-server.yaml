@@ -16,14 +16,7 @@ spec:
     spec:
       containers:
         - name: newserver
-          image: abdelaziz89/servereses:v1.0
+          image: abdelaziz89/central-server:v6.0
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - name: parquet
-              mountPath: /files
-              subPath: files
-      volumes:
-        - name: parquet
-          persistentVolumeClaim:
-            claimName: serverstorage
+

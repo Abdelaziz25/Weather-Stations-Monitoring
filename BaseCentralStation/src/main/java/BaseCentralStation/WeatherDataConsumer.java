@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class WeatherDataConsumer {
-    private static final int BATCH_SIZE = 100;
+    private static final int BATCH_SIZE = 50;
 
     public static void main(String[] args) throws IOException {
         String projectDir = System.getProperty("user.dir");
@@ -51,7 +51,11 @@ public class WeatherDataConsumer {
         int fileIndex = 0;
 
         ParquetWriter<GenericRecord> parquetWriter = null;
-
+//       for(int i=1;i<11;i++)
+//       {
+//           File stationDir = new File("/mnt/c/Users/abdel/Desktop/Connect-4/Weather-Stations-Monitoring/BaseCentralStation/Volume/station"+i);
+//           if (!stationDir.exists()) stationDir.mkdir();
+//       }
         try {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
@@ -62,26 +66,25 @@ public class WeatherDataConsumer {
                     recordCount++;
                     System.out.println(record.value());
                     System.out.println(recordCount);
-                    System.out.println("here");
+                    System.out.println("here_here");
                     if (recordCount >= BATCH_SIZE) {
                         // Write the batch to a Parquet file
-                        String outputDirectory = "files";
-                        String parquetFilePath = outputDirectory + "/Project" + fileIndex + ".parquet";
+                        System.out.println("l2");
+                        String parquetFilePath = "/mnt/c/Users/abdel/Desktop/Connect-4/Weather-Stations-Monitoring/BaseCentralStation/Volume/Project"+ fileIndex + ".parquet";
                         Path path = new Path(parquetFilePath);
                         fileIndex++;
-                        if (parquetWriter == null) {
-                            parquetWriter = AvroParquetWriter.<GenericRecord>builder(path)
-                                    .withSchema(avroSchema)
-                                    .withCompressionCodec(CompressionCodecName.SNAPPY)
+                        System.out.println(fileIndex);
+                        System.out.println("l3");
+                        System.out.println("l4");
+                        parquetWriter = AvroParquetWriter.<GenericRecord>builder(path).withSchema(avroSchema).withCompressionCodec(CompressionCodecName.SNAPPY)
                                     .build();
-                        }
                         try {
+                            System.out.println("l5");
                             for (GenericRecord batchRecord : recordsBatch) {
                                 parquetWriter.write(batchRecord);
                             }
                         } catch (IOException e) {
                             System.out.println("llll");
-                            System.out.println(e);
                             e.printStackTrace();
                             // Optionally handle the exception, e.g., skip the batch
                         } finally {

@@ -8,5 +8,4 @@ spec:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/mnt/c/Users/abdel/Desktop/Connect-4/Weather-Stations-Monitoring/BaseCentralStation/Volume"
+  volumeMode: Filesystem
