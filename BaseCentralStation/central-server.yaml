@@ -19,4 +19,10 @@ spec:
           image: abdelaziz89/central-server:v13.0
           ports:
             - containerPort: 8080
-
+          volumeMounts:
+            - mountPath: "/mnt/Volume"
+              name: parquet
+      volumes:
+        - name: parquet
+          persistentVolumeClaim:
+            claimName: serverstorage

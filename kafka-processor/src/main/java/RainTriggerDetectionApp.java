@@ -1,5 +1,9 @@
 
-
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
+import java.util.Properties;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -10,11 +14,8 @@ import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Produced;
 import org.json.JSONObject;
 
-import java.util.Properties;
-
-
 public class RainTriggerDetectionApp {
-
+    private static KafkaProducer<String, String> producer;
     public static void main(String[] args) {
         Properties config = new Properties();
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "rain-trigger-app");
@@ -31,6 +32,14 @@ public class RainTriggerDetectionApp {
         weatherStream.filter((key, value) -> isRaining(value))
                 .to("rain-triggers", Produced.with(Serdes.String(), Serdes.String()));
 
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-release.kafka:9092");
+        props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                StringSerializer.class.getName());
+
+        producer = new KafkaProducer<>(props);
         Topology topology = builder.build();
 
         KafkaStreams streams = new KafkaStreams(topology, config);
@@ -50,6 +59,8 @@ public class RainTriggerDetectionApp {
             if (humidity > 70) {
                 // Print value if it's raining
                 System.out.println("Raining detected: " + value);
+                String message = "Raining detected: " + value;
+                producer.send(new ProducerRecord<>("processor", message));
                 return true;
             }
         } catch (Exception e) {

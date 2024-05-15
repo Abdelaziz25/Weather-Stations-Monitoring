@@ -8,4 +8,5 @@ spec:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem
+  hostPath:
+    path: "/mnt/c/Users/abdel/Desktop/Parquet"

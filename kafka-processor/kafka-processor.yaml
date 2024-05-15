@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: kafkaprocessor
-          image: abdelaziz89/kafkaprocessor:v1.0
+          image: abdelaziz89/kafkaprocessor:v3.0
           ports:
             - containerPort: 8080
