@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 
 public class ActiveFileHandler {
     private final int MAX_SIZE = 200;
+    private final String initialFilePath ="src/Storage/activeFile";
+
     private RandomAccessFile activeFile;
     private String activeFilePath;
     private long nextFilePosition;
@@ -22,7 +24,7 @@ public class ActiveFileHandler {
         this.converter = new TypesConverter();
 
         if (activePath == null || activePath.isEmpty()) {
-            this.activeFilePath = "src/Storage/activeFile"; // Default active file path
+            this.activeFilePath = initialFilePath; // Default active file path
         } else {
             this.activeFilePath = activePath;
         }
@@ -40,11 +42,13 @@ public class ActiveFileHandler {
 
     private void createNewActiveFile() throws IOException {
         this.activeFile.close();
-        this.activeFilePath = activeFilePath+String.valueOf(fileCounter++);
+        this.activeFilePath = initialFilePath+String.valueOf(fileCounter++);
+
         initActiveFile(this.activeFilePath);
 
         if(debug) System.out.println("ADD NEW ACTIVE FILE "+ this.activeFilePath + "File write position = "+this.nextFilePosition);
     }
+
 
     private void checkForPossibleNewActiveFile(int addedEntryLength) throws IOException {
         Path filePath = Paths.get(this.activeFilePath);

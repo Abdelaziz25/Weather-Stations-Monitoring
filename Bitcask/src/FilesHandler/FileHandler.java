@@ -3,16 +3,17 @@ package FilesHandler;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import Converter.TypesConverter;
-import Entries.BitCaskEntry;
 
+import DTO.ActiveFileInfo;
 
 public class FileHandler {
 
     public FileHandler()  {}
 
-    public static List<String> listFilesWithExtension(String directoryPath, String extension) {
+    public List<String> listFilesWithExtension(String directoryPath, String extension) {
         List<String> filePaths = new ArrayList<>();
 
         // Create a File object for the directory path
@@ -40,49 +41,32 @@ public class FileHandler {
         return filePaths;
     }
 
+    public ActiveFileInfo getFilePathAndCounter(String hintFilePath){
+
+        int extentionIndex = hintFilePath.lastIndexOf(".");
+        int counter;
+
+
+        Pattern pattern = Pattern.compile("activeFile(\\d+)\\.");
+        Matcher matcher = pattern.matcher(hintFilePath);
+
+        if (matcher.find()) {
+            // Extract the number and increment it
+            String numberStr = matcher.group(1);
+            counter = Integer.parseInt(numberStr) + 1;
+        } else {
+            counter = 0;
+        }
+
+
+        String currentActiveFile = hintFilePath.substring(0, extentionIndex);
+
+        return  new ActiveFileInfo(currentActiveFile,counter);
+    }
 
 
 
 
-////    private byte[] getSerializedEntry(Object entry) throws IOException {
-////        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-////        ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
-////        objectStream.writeObject(entry);
-////        return byteStream.toByteArray();
-////    }
-////
-////
-////
-////    public long writeEntryToFile(String filePath, Object entry) throws IOException {
-////        byte [] serializedEntry = getSerializedEntry(entry);
-////        RandomAccessFile file = new RandomAccessFile(filePath, "rw");
-////        long valPos = file.length();
-////        file.seek(valPos);
-////        file.write(serializedEntry);
-////        return valPos;
-////    }
-//
-//
-//
-//    public List<BitCaskEntry> readAllEntriesFromFile(String filePath) throws IOException, ClassNotFoundException {
-//        List<BitCaskEntry> entries = new ArrayList<>();
-//        BitCaskEntryHandler bitCaskHandler = new BitCaskEntryHandler();
-//
-//        RandomAccessFile file = new RandomAccessFile(filePath, "r");
-//        long fileLength = file.length();
-//        long currentPtr = 0;
-//
-//        while (currentPtr < fileLength) {
-//            BitCaskEntry entry = bitCaskHandler.readBitCaskEntryFromFile(filePath, currentPtr);
-//            currentPtr = bitCaskHandler.getFilePointer();
-//
-//            System.out.println("Entry Readed from file  >>> "+ entry.toString());
-//            entries.add(entry);
-//        }
-//
-//        return entries;
-//    }
-//
 
 
 }

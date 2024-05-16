@@ -1,6 +1,7 @@
 package BitCask;
 
 //import CompactController.Compacter;
+import DTO.ActiveFileInfo;
 import Entries.BitCaskEntry;
 import Entries.HintFileEntry;
 import Entries.KeyDirectoryEntry;
@@ -10,12 +11,13 @@ import FilesHandler.FileHandler;
 import FilesHandler.HintFileHandler;
 import Visualization.ConsolePrinter;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.io.RandomAccessFile;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 
 public class BitCask implements IBitCask {
     private HashMap <String , KeyDirectoryEntry> keyDir;
@@ -32,7 +34,7 @@ public class BitCask implements IBitCask {
     private boolean debug = true;
 
 
-    public BitCask() throws IOException{
+    public BitCask() {
         bitCaskBuilder = new BitCaskBuilder();
         fileHandler = new FileHandler();
         hintFileHandler = new HintFileHandler();
@@ -51,54 +53,48 @@ public class BitCask implements IBitCask {
 
 
     public void start() throws IOException {
-        List<String> hintFilesPaths = fileHandler.listFilesWithExtension("src/Storage" , "hint");
+        List<String> hintFilesPaths = fileHandler.listFilesWithExtension("src/Storage", "hint");
 
-        if(debug) {
-            System.out.println("Number of Hint Files = "+hintFilesPaths.size());
-            for(String file : hintFilesPaths){
+        if (debug) {
+            System.out.println("Number of Hint Files = " + hintFilesPaths.size());
+            for (String file : hintFilesPaths) {
                 System.out.println(file);
             }
         }
 
-        if(hintFilesPaths.size() == 0){
-            if(debug)       System.out.println("No hint files found it's a new Start");
+        if (hintFilesPaths.isEmpty()) {
+            if (debug) System.out.println("No hint files found it's a new Start");
             init();
             return;
         }
 
         // constructKeyDir
-        this.keyDir = new HashMap <> ();
-        String currentActiveFile = "";
+        this.keyDir = new HashMap<>();
+        String currentActiveHintFile = "";
 
         // read Hint File and append in hashMap
-        for(String hintFile : hintFilesPaths){
+        for (String hintFile : hintFilesPaths) {
             this.keyDir = bitCaskBuilder.constructKeyDirectoryFromHintFile(hintFile, keyDir);
 
-            if(debug) {
-                System.out.println("Key Directory after reading hint file >> "+hintFile);
+            if (debug) {
+                System.out.println("Key Directory after reading hint file >> " + hintFile);
                 cp.printKeyDirectory(this.keyDir);
             }
 
-            if(hintFile.length() > currentActiveFile.length())    currentActiveFile = hintFile;   // Get current Active File
+            if (hintFile.length() > currentActiveHintFile.length())
+                currentActiveHintFile = hintFile;   // Get current Active File
         }
 
-        int extentionIndex = currentActiveFile.lastIndexOf(".");
-        int counter=0;
-        char precedingChar = currentActiveFile.charAt(extentionIndex - 1);
-        if (Character.isDigit(precedingChar)) {
-            counter = Character.getNumericValue(precedingChar) + 1;
-        } else {
-            counter = 0;
-        }
+        ActiveFileInfo activeFileInfo = fileHandler.getFilePathAndCounter(currentActiveHintFile);
+        if(debug)       System.out.println("Current Active File >> " + activeFileInfo.getFilePath());
+        if(debug)       System.out.println("Counter >> " + activeFileInfo.getCounter());
 
-        currentActiveFile = currentActiveFile.substring(0, extentionIndex);
-        System.out.println("Current Active File >> "+currentActiveFile);
-        System.out.println("Counter >> "+ counter);
-
-        activeFileHandler= new ActiveFileHandler(currentActiveFile, counter);
-        return;
-
+        activeFileHandler = new ActiveFileHandler(activeFileInfo.getFilePath(), activeFileInfo.getCounter());
     }
+
+
+
+
 
 
     public void put(byte[] key , byte[] value) throws IOException {

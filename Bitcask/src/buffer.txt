@@ -13,3 +13,65 @@ Class BitCaskEntry
 //        in.readFully(valueBytes,16+keyLength,valueLength);
 //        this.value = valueBytes;
 //    }
+
+
+Class BitCask >> start function
+//        int extentionIndex = currentActiveFile.lastIndexOf(".");
+//        int counter;
+//
+
+//        Pattern pattern = Pattern.compile("activeFile(\\d+)\\.");
+//        Matcher matcher = pattern.matcher(currentActiveFile);
+//
+//        if (matcher.find()) {
+//            // Extract the number and increment it
+//            String numberStr = matcher.group(1);
+//            counter = Integer.parseInt(numberStr) + 1;
+//        } else {
+//            counter = 0;
+//        }
+//
+//
+//        currentActiveFile = currentActiveFile.substring(0, extentionIndex);
+
+Class FileHandler
+
+////    private byte[] getSerializedEntry(Object entry) throws IOException {
+////        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+////        ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+////        objectStream.writeObject(entry);
+////        return byteStream.toByteArray();
+////    }
+////
+////
+////
+////    public long writeEntryToFile(String filePath, Object entry) throws IOException {
+////        byte [] serializedEntry = getSerializedEntry(entry);
+////        RandomAccessFile file = new RandomAccessFile(filePath, "rw");
+////        long valPos = file.length();
+////        file.seek(valPos);
+////        file.write(serializedEntry);
+////        return valPos;
+////    }
+//
+//
+//
+//    public List<BitCaskEntry> readAllEntriesFromFile(String filePath) throws IOException, ClassNotFoundException {
+//        List<BitCaskEntry> entries = new ArrayList<>();
+//        BitCaskEntryHandler bitCaskHandler = new BitCaskEntryHandler();
+//
+//        RandomAccessFile file = new RandomAccessFile(filePath, "r");
+//        long fileLength = file.length();
+//        long currentPtr = 0;
+//
+//        while (currentPtr < fileLength) {
+//            BitCaskEntry entry = bitCaskHandler.readBitCaskEntryFromFile(filePath, currentPtr);
+//            currentPtr = bitCaskHandler.getFilePointer();
+//
+//            System.out.println("Entry Readed from file  >>> "+ entry.toString());
+//            entries.add(entry);
+//        }
+//
+//        return entries;
+//    }
+//
