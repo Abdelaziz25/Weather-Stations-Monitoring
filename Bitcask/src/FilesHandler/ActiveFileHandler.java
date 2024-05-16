@@ -12,9 +12,14 @@ import java.nio.file.Paths;
 public class ActiveFileHandler {
     private final int MAX_SIZE = 200;
     private final String initialFilePath ="src/Storage/activeFile";
+    private final String copy = ".copy";
 
     private RandomAccessFile activeFile;
+    private RandomAccessFile activeFileCopy;
+
     private String activeFilePath;
+    private String activeFilePathCopy;
+
     private long nextFilePosition;
     static private int fileCounter;
     private TypesConverter converter;
@@ -29,6 +34,8 @@ public class ActiveFileHandler {
             this.activeFilePath = activePath;
         }
 
+
+
         this.fileCounter = counter;
         initActiveFile(this.activeFilePath);
     }
@@ -36,6 +43,8 @@ public class ActiveFileHandler {
 
     private void initActiveFile(String filePath) throws IOException {
         this.activeFile = new RandomAccessFile(filePath,"rw");
+        this.activeFileCopy = new RandomAccessFile(filePath+copy,"rw");
+
         this.nextFilePosition = this.activeFile.length();
     }
 
@@ -44,9 +53,10 @@ public class ActiveFileHandler {
         this.activeFile.close();
         this.activeFilePath = initialFilePath+String.valueOf(fileCounter++);
 
+
         initActiveFile(this.activeFilePath);
 
-        if(debug) System.out.println("ADD NEW ACTIVE FILE "+ this.activeFilePath + "File write position = "+this.nextFilePosition);
+        if(debug) System.out.println("ADD NEW ACTIVE FILE "+ this.activeFilePath + "and it's replica " + this.activeFilePathCopy + " File write position = "+this.nextFilePosition);
     }
 
 
@@ -68,8 +78,14 @@ public class ActiveFileHandler {
         }
 
         checkForPossibleNewActiveFile(entry.getEntrySize());
+
+        // write to active Path
         this.activeFile.seek(this.nextFilePosition);
         this.activeFile.write(entry.toByteArray());
+
+        // write to active replica
+        this.activeFileCopy.seek(this.nextFilePosition);
+        this.activeFileCopy.write(entry.toByteArray());
 
         long filePosition = this.nextFilePosition; // get the filePosition
         this.nextFilePosition = this.activeFile.getFilePointer();    // Update nextFilePosition for the next write
@@ -101,6 +117,5 @@ public class ActiveFileHandler {
     public String getFileId(){
         return this.activeFilePath;
     }
-
 
 }

@@ -24,10 +24,10 @@ public class Main {
         byte[] value4 = "val4".getBytes();
 
 
-//        bitcask.put(key1 , value1);
-//        bitcask.put(key2 , value2);
-//        bitcask.put(key3 , value3);
-//        bitcask.put(key4 , value4);
+        bitcask.put(key1 , value1);
+        bitcask.put(key2 , value2);
+        bitcask.put(key3 , value3);
+        bitcask.put(key4 , value4);
 
         cp.printKeyDirectory(bitcask.getKeyDir());
 
