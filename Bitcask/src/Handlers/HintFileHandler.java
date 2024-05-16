@@ -26,7 +26,7 @@ public class HintFileHandler {
     }
 
     public HintFileEntry readHintFileEntryFromFile(RandomAccessFile file , long currentPosition) throws IOException {
-        System.out.println("Read from hint file at position " + currentPosition);
+//        System.out.println("Read from hint file at position " + currentPosition);
         file.seek(currentPosition);
 
         byte [] timeStamp = new byte[8];

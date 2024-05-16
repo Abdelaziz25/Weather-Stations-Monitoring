@@ -103,3 +103,105 @@ Successfully Returned Value [118, 97, 108, 52]
 Key not found
 
 Process finished with exit code 0
+
+
+
+NEWWWWWWWWWWWWWWWW
+/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -javaagent:/snap/intellij-idea-ultimate/493/lib/idea_rt.jar=44951:/snap/intellij-idea-ultimate/493/bin -Dfile.encoding=UTF-8 -classpath /home/veronica/Documents/GitHub/Weather-Stations-Monitoring/Bitcask/out/production/Bitcask Main
+Number of Hint Files = 0
+No hint files found it's a new Start
+Successfully Started BitCask
+writeToActiveFile a entry of size = 35
+write at pos = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929456, keyLength=4, valueLength=15, key=[107, 101, 121, 49], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=0, valueSize=15, timeStamp=1715861929456}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929456, keySize=4, valueSize=15, valuePosition=0, key=[107, 101, 121, 49]}
+writeToActiveFile a entry of size = 48
+write at pos = 35
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929529, keyLength=4, valueLength=28, key=[107, 101, 121, 50], value=[118, 97, 108, 50, 121, 114, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 119, 117, 105, 121, 116, 105, 119]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile', valuePosition=35, valueSize=28, timeStamp=1715861929529}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929529, keySize=4, valueSize=28, valuePosition=35, key=[107, 101, 121, 50]}
+writeToActiveFile a entry of size = 48
+write at pos = 83
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile0and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929531, keyLength=4, valueLength=28, key=[107, 101, 121, 51], value=[118, 97, 108, 51, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile0', valuePosition=0, valueSize=28, timeStamp=1715861929531}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929531, keySize=4, valueSize=28, valuePosition=0, key=[107, 101, 121, 51]}
+writeToActiveFile a entry of size = 37
+write at pos = 48
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929549, keyLength=4, valueLength=17, key=[107, 101, 121, 52], value=[118, 97, 108, 52, 86, 71, 82, 89, 82, 89, 82, 84, 85, 84, 73, 84, 89]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile0', valuePosition=48, valueSize=17, timeStamp=1715861929549}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929549, keySize=4, valueSize=17, valuePosition=48, key=[107, 101, 121, 52]}
+writeToActiveFile a entry of size = 40
+write at pos = 85
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile1and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929550, keyLength=4, valueLength=20, key=[107, 101, 121, 53], value=[118, 97, 108, 53, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 50, 50]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile1', valuePosition=0, valueSize=20, timeStamp=1715861929550}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929550, keySize=4, valueSize=20, valuePosition=0, key=[107, 101, 121, 53]}
+writeToActiveFile a entry of size = 37
+write at pos = 40
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929551, keyLength=4, valueLength=17, key=[107, 101, 121, 54], value=[118, 97, 108, 54, 53, 56, 51, 50, 57, 54, 48, 55, 81, 51, 48, 54, 51]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile1', valuePosition=40, valueSize=17, timeStamp=1715861929551}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929551, keySize=4, valueSize=17, valuePosition=40, key=[107, 101, 121, 54]}
+writeToActiveFile a entry of size = 36
+write at pos = 77
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile2and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929551, keyLength=4, valueLength=16, key=[107, 101, 121, 55], value=[118, 97, 108, 55, 48, 54, 56, 53, 84, 53, 51, 52, 50, 49, 50, 50]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile2', valuePosition=0, valueSize=16, timeStamp=1715861929551}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929551, keySize=4, valueSize=16, valuePosition=0, key=[107, 101, 121, 55]}
+writeToActiveFile a entry of size = 35
+write at pos = 36
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929552, keyLength=4, valueLength=15, key=[107, 101, 121, 56], value=[118, 97, 108, 56, 50, 49, 52, 55, 54, 49, 50, 53, 48, 50, 54]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile2', valuePosition=36, valueSize=15, timeStamp=1715861929552}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929552, keySize=4, valueSize=15, valuePosition=36, key=[107, 101, 121, 56]}
+writeToActiveFile a entry of size = 34
+write at pos = 71
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile3and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929552, keyLength=4, valueLength=14, key=[107, 101, 121, 57], value=[118, 97, 108, 57, 50, 65, 71, 74, 72, 71, 83, 71, 73, 83]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile3', valuePosition=0, valueSize=14, timeStamp=1715861929552}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929552, keySize=4, valueSize=14, valuePosition=0, key=[107, 101, 121, 57]}
+writeToActiveFile a entry of size = 40
+write at pos = 34
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929553, keyLength=5, valueLength=19, key=[107, 101, 121, 49, 48], value=[118, 97, 108, 49, 48, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 86, 50, 50]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile3', valuePosition=34, valueSize=19, timeStamp=1715861929553}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929553, keySize=5, valueSize=19, valuePosition=34, key=[107, 101, 121, 49, 48]}
+writeToActiveFile a entry of size = 35
+write at pos = 74
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile4and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929554, keyLength=4, valueLength=15, key=[107, 101, 121, 49], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile4', valuePosition=0, valueSize=15, timeStamp=1715861929554}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929554, keySize=4, valueSize=15, valuePosition=0, key=[107, 101, 121, 49]}
+writeToActiveFile a entry of size = 35
+write at pos = 35
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929555, keyLength=4, valueLength=15, key=[107, 101, 121, 50], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile4', valuePosition=35, valueSize=15, timeStamp=1715861929555}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929555, keySize=4, valueSize=15, valuePosition=35, key=[107, 101, 121, 50]}
+writeToActiveFile a entry of size = 35
+write at pos = 70
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile5and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929555, keyLength=4, valueLength=15, key=[107, 101, 121, 51], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile5', valuePosition=0, valueSize=15, timeStamp=1715861929555}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929555, keySize=4, valueSize=15, valuePosition=0, key=[107, 101, 121, 51]}
+writeToActiveFile a entry of size = 35
+write at pos = 35
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929556, keyLength=4, valueLength=15, key=[107, 101, 121, 52], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile5', valuePosition=35, valueSize=15, timeStamp=1715861929556}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929556, keySize=4, valueSize=15, valuePosition=35, key=[107, 101, 121, 52]}
+writeToActiveFile a entry of size = 35
+write at pos = 70
+File is too large to write in
+ADD NEW ACTIVE FILE src/Storage/activeFile6and it's replica null File write position = 0
+Successfully Added this Entry To BitCask File >> BitCaskEntry{timeStamp=1715861929556, keyLength=4, valueLength=15, key=[107, 101, 121, 53], value=[118, 97, 108, 49, 100, 103, 97, 119, 117, 105, 119, 117, 111, 114, 121]}
+Successfully Added this Entry To In Memory directory >> KeyDirectoryEntry{fileId='src/Storage/activeFile6', valuePosition=0, valueSize=15, timeStamp=1715861929556}
+Successfully Added this Entry To Hint File >> HintFileEntry{tstamp=1715861929556, keySize=4, valueSize=15, valuePosition=0, key=[107, 101, 121, 53]}
+
+Process finished with exit code 0
+
+
+

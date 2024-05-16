@@ -1,6 +1,10 @@
 package Handlers;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,6 +16,49 @@ import DTO.ActiveFileInfo;
 public class FileHandler {
 
     public FileHandler()  {}
+
+    public void deleteFiles(List<String> filePaths) {
+        List<String> modifiedFilePaths = new ArrayList<>();
+        for (String filePath : filePaths) {
+            int lastDotIndex = filePath.lastIndexOf('.');
+            if (lastDotIndex != -1) {
+                filePath = filePath.substring(0, lastDotIndex);
+            }
+            modifiedFilePaths.add(filePath);
+        }
+
+        for (String filePath : modifiedFilePaths) {
+            try {
+                Path path = Paths.get(filePath);
+                Files.deleteIfExists(path);
+                System.out.println("Deleted: " + filePath);
+
+                Path Copypath = Paths.get(filePath+".copy");
+                Files.deleteIfExists(Copypath);
+                System.out.println("Deleted: " + Copypath);
+
+                Path Hintpath = Paths.get(filePath+".hint");
+                Files.deleteIfExists(Hintpath);
+                System.out.println("Deleted: " + Hintpath);
+
+            } catch (IOException e) {
+                System.err.println("Failed to delete: " + filePath + " due to: " + e.getMessage());
+            }
+        }
+    }
+
+    public void copyFile(String sourcePath, String targetPath) {
+        Path source = Paths.get(sourcePath);
+        Path target = Paths.get(targetPath);
+
+        try {
+            // Copy file from source to target
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("File copied from " + sourcePath + " to " + targetPath);
+        } catch (IOException e) {
+            System.err.println("Failed to copy file: " + e.getMessage());
+        }
+    }
 
     public List<String> listFilesWithExtension(String directoryPath, String extension) {
         List<String> filePaths = new ArrayList<>();

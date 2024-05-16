@@ -17,6 +17,24 @@ public class BitCaskEntryHandler {
         this.filePointer = 0;
     }
 
+    public byte[] getEntryInKeyDirectory(String filePath, long valuePosition , int valueSize) throws IOException {
+        System.out.println("readFromFile a file " + filePath + " of size = "+valueSize);
+        byte [] value = new byte[valueSize];
+
+        RandomAccessFile file = new RandomAccessFile(filePath, "r");
+        file.seek(valuePosition);
+
+        file.read(new byte[8] , 0 , 8);
+        byte [] keySize = new byte[4];
+
+        file.read(keySize , 0, 4);
+        int size = this.converter.byteArrayToInt(keySize);
+
+        file.seek(valuePosition + 16 + size);
+        file.read(value , 0 , valueSize);
+        return value;
+    }
+
     public BitCaskEntry readBitCaskEntryFromFile(RandomAccessFile file ,long currentPosition) throws IOException {
 //        RandomAccessFile file = new RandomAccessFile(filePath, "r");
         //        setFilePointer(file.getFilePointer());

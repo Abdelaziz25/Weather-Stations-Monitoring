@@ -14,16 +14,18 @@ import java.util.*;
 public class CompactionController {
 
 
-    private String mergePath = "src/Storage";
+    private String mergePath = "src/Storage/activeFile";
     private String hintExtension = ".hint";
-    private int counter = 0;
+    private String copyExtension = ".copy";
+
+    private int counter = -1;
 
     private final int MIN_COMPACTED_FILES = 4;
 
     private FileHandler fileHandler;
     private ConsolePrinter cp;
     private BitCaskEntryHandler bitCaskEntryHandler;
-    private boolean debug = false;
+    private boolean debug = true;
 
     public CompactionController() {
         this.fileHandler = new FileHandler();
@@ -58,6 +60,7 @@ public class CompactionController {
         HashMap<String , BitCaskEntry> mostRecentEntries = new HashMap<>();
 
         for(String filePath : filePaths){
+
             List<BitCaskEntry> bitCaskEntries = readAllEntries(filePath);
 
             if(debug)       System.out.println("File in path >> " + filePath + " >>  has entries = " + bitCaskEntries.size());
@@ -66,6 +69,7 @@ public class CompactionController {
                 String key = Arrays.toString(entry.getKey());
 
                 if(!mostRecentEntries.containsKey(key)){
+                    if(debug) System.out.println("New entry founded with key ===== "+key);
                     mostRecentEntries.put(key , entry);
                 }else{
                     BitCaskEntry current = mostRecentEntries.get(key);
@@ -84,8 +88,10 @@ public class CompactionController {
 
         String currentMergePath = this.mergePath + String.valueOf(this.counter);
         String currentHintPath = currentMergePath+this.hintExtension;
+        String currentCopyPath = currentMergePath+ this.copyExtension;
 
         RandomAccessFile mergedFile = new RandomAccessFile(currentMergePath, "rw");
+        RandomAccessFile mergedFileCopy = new RandomAccessFile(currentCopyPath, "rw");
         RandomAccessFile hintFile = new RandomAccessFile(currentHintPath, "rw");
 
         HashMap<String , KeyDirectoryEntry> updatedKeyDirectory = new HashMap<>();
@@ -94,15 +100,19 @@ public class CompactionController {
             BitCaskEntry entry = mostRecentEntries.get(key);
 
             long entryPos = mergedFile.getFilePointer();
+
             mergedFile.write(entry.toByteArray());
+            mergedFileCopy.write(entry.toByteArray());
 
             updatedKeyDirectory.put(key , new KeyDirectoryEntry(entry.getTimeStamp() , entry.getValueLength(), entryPos , currentMergePath));
 
             HintFileEntry hintEntry = new HintFileEntry(entry.getTimeStamp() , entry.getKeyLength() , entry.getValueLength() , entryPos , entry.getKey() );
             hintFile.write(hintEntry.toByteArray());
         }
-        this.counter++;
+
+        this.counter--;
         mergedFile.close();
+        mergedFileCopy.close();
         hintFile.close();
 
         return updatedKeyDirectory;
@@ -110,9 +120,12 @@ public class CompactionController {
 
 
     public void compact(HashMap<String , KeyDirectoryEntry> originalKeyDirectory) throws IOException {
-        List<String> filePaths = fileHandler.listFilesWithExtension("src/Storage",".copy");
+        List<String> filePaths = fileHandler.listFilesWithExtension("src/Storage/","copy");
 
-        if(filePaths.size() < MIN_COMPACTED_FILES) return;
+        if(filePaths.size() < MIN_COMPACTED_FILES) {
+            System.out.println("No need for compaction");
+            return;
+        }
 
         if(debug){
             System.out.println("Compacting " + filePaths.size() + " files");
@@ -126,7 +139,7 @@ public class CompactionController {
 
         if(debug)           this.cp.printCompactDictionary(mostRecentEntries);
 
-        HashMap<String , KeyDirectoryEntry> updatedKeyDirectory = getUpdatedKeyDirectory(mostRecentEntries);
+        HashMap<String, KeyDirectoryEntry> updatedKeyDirectory = getUpdatedKeyDirectory(mostRecentEntries);
 
         if(debug){
             System.out.println("Updated KeyDirectory after compaction");
@@ -144,6 +157,9 @@ public class CompactionController {
 
         if(debug) this.cp.printKeyDirectory(originalKeyDirectory);
 
+
+
+        this.fileHandler.deleteFiles(filePaths);
     }
 
 

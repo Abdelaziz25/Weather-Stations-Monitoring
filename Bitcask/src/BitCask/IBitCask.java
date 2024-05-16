@@ -10,6 +10,7 @@ public interface IBitCask {
 
     public byte [] get(byte[] key) throws IOException, ClassNotFoundException;
 
-   public void close();
+   public void close() throws IOException;
 
+   public void compact() throws IOException;
 }
