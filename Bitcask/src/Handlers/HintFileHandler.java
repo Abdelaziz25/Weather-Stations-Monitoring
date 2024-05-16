@@ -1,10 +1,8 @@
-package FilesHandler;
+package Handlers;
 
 import Converter.TypesConverter;
-import Entries.BitCaskEntry;
 import Entries.HintFileEntry;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 

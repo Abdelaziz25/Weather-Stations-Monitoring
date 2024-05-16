@@ -1,4 +1,4 @@
-package FilesHandler;
+package Handlers;
 
 import Converter.TypesConverter;
 import Entries.BitCaskEntry;
@@ -17,8 +17,9 @@ public class BitCaskEntryHandler {
         this.filePointer = 0;
     }
 
-    public BitCaskEntry readBitCaskEntryFromFile(String filePath ,long currentPosition) throws IOException {
-        RandomAccessFile file = new RandomAccessFile(filePath, "r");
+    public BitCaskEntry readBitCaskEntryFromFile(RandomAccessFile file ,long currentPosition) throws IOException {
+//        RandomAccessFile file = new RandomAccessFile(filePath, "r");
+        //        setFilePointer(file.getFilePointer());
         file.seek(currentPosition);
 
         byte [] timeStamp = new byte[8];
@@ -39,7 +40,7 @@ public class BitCaskEntryHandler {
 
         file.read(key , 0 , actualKeySize);
         file.read(value , 0 , actualValueSize);
-        setFilePointer(file.getFilePointer());
+
         return new BitCaskEntry(actualTimeStamp , actualKeySize , actualValueSize , key , value);
     }
 

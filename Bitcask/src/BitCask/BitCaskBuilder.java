@@ -2,7 +2,7 @@ package BitCask;
 
 import Entries.HintFileEntry;
 import Entries.KeyDirectoryEntry;
-import FilesHandler.HintFileHandler;
+import Handlers.HintFileHandler;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

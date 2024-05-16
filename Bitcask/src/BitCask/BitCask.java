@@ -1,14 +1,15 @@
 package BitCask;
 
 //import CompactController.Compacter;
+import Controllers.CompactionController;
 import DTO.ActiveFileInfo;
 import Entries.BitCaskEntry;
 import Entries.HintFileEntry;
 import Entries.KeyDirectoryEntry;
-import FilesHandler.ActiveFileHandler;
+import Handlers.ActiveFileHandler;
 
-import FilesHandler.FileHandler;
-import FilesHandler.HintFileHandler;
+import Handlers.FileHandler;
+import Handlers.HintFileHandler;
 import Visualization.ConsolePrinter;
 
 
@@ -28,7 +29,7 @@ public class BitCask implements IBitCask {
     private FileHandler fileHandler ;
     private HintFileHandler hintFileHandler;
 
-    //    private Compacter compacter ;
+    private CompactionController compactionController;
 
     private ConsolePrinter cp ;
     private boolean debug = true;
@@ -39,6 +40,7 @@ public class BitCask implements IBitCask {
         fileHandler = new FileHandler();
         hintFileHandler = new HintFileHandler();
         cp = new ConsolePrinter();
+        compactionController = new CompactionController();
     }
 
 
@@ -149,26 +151,9 @@ public class BitCask implements IBitCask {
 
     }
 
-    //    public void compact() throws IOException, ClassNotFoundException {
-//
-//        String directoryPath = "src/Storage";
-//
-//        // List all files in the directory
-//        File directory = new File(directoryPath);
-//        File[] files = directory.listFiles();
-//
-//        if (files == null || files.length == 0) {
-//            System.out.println("No files found in the specified directory.");
-//            return;
-//        }
-//
-//        for (File file : files) {
-//            System.out.println(file.getAbsolutePath());
-//        }
-//
-//        compacter = new Compacter(files);
-//        compacter.startMerge();
-//    }
+    public void compact() throws IOException{
+            this.compactionController.compact(this.keyDir);
+    }
 
 
 }

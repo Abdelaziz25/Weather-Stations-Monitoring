@@ -1,4 +1,4 @@
-package FilesHandler;
+package Handlers;
 
 import Converter.TypesConverter;
 import Entries.BitCaskEntry;
