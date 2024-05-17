@@ -42,12 +42,9 @@ public class WeatherDataConsumer {
         Schema avroSchema = new Schema.Parser().parse(new File(avroSchemaFilePath));
         int recordCount = 0;
         Map<Integer, List<GenericRecord>> stationRecordsMap = new HashMap<>();
-            System.out.println("lola");
             for(int i=1;i<11;i++)
             {
                 stationRecordsMap.put(i, new ArrayList<>());
-//                File stationDir = new File("/mnt/Volume"+"/station"+i);
-//                if (!stationDir.exists()) stationDir.mkdir();
             }
 
 
@@ -62,14 +59,9 @@ public class WeatherDataConsumer {
                     int stationId = (int) avroRecord.get("station_id");
                     List<GenericRecord> stationRecords = stationRecordsMap.get(stationId);
                     stationRecords.add(avroRecord);
-                    System.out.println(stationId);
-                    System.out.println(recordCount);
-                    System.out.println("heello");
                     if (recordCount >= BATCH_SIZE) {
                         // Write the batch to a Parquet file
-                        System.out.println("l2");
                         try {
-                            System.out.println("l5");
                             writeRecordsToParquet(stationId, stationRecords, avroSchema);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -102,17 +94,9 @@ public class WeatherDataConsumer {
         return recordBuilder.build();
     }
     private static void writeRecordsToParquet(int stationId, List<GenericRecord> records, Schema schema) throws IOException {
-        System.out.println(stationId);
         LocalDate today = LocalDate.now();
         String dateDirName = today.format(DATE_FORMATTER);
-        System.out.println(dateDirName);
         String stationDirPath = "/mnt/Volume" + "/station" + stationId +"/"+dateDirName ;
-////        File dateDir = new File(stationDirPath);
-////        if (!dateDir.exists()) {
-////            dateDir.mkdirs();
-////        }
-        System.out.println(System.currentTimeMillis());
-        System.out.println(fileIndex);
         String parquetFilePath = stationDirPath+ "/Project_"+ System.currentTimeMillis()+ ".parquet";;
         Path path = new Path(parquetFilePath);
         ParquetWriter<GenericRecord> parquetWriter = null;

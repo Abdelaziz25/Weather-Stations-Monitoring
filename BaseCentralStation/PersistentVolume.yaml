@@ -9,4 +9,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/c/Users/abdel/Desktop/Parquet"
+    path: "/data"
