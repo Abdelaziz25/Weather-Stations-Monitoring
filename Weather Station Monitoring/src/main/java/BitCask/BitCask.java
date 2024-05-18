@@ -77,9 +77,7 @@ public class BitCask implements IBitCask {
 
     @Override
     public void start() throws IOException {
-        scheduleCompaction();
         List<String> hintFilesPaths = fileHandler.listFilesWithExtension("src/main/java/Storage", "hint");
-
         if(checkForNewStart(hintFilesPaths.isEmpty()))      return;
 
         // constructKeyDir
@@ -95,6 +93,7 @@ public class BitCask implements IBitCask {
             System.out.println("Current Active File >> " + activeFileInfo.getFilePath());
             System.out.println("Counter >> " + activeFileInfo.getCounter());
         }
+        scheduleCompaction();
     }
 
 

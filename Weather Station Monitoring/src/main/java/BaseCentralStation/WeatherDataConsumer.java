@@ -53,6 +53,8 @@ public class WeatherDataConsumer {
         ParquetWriter<GenericRecord> parquetWriter = null;
 
         try {
+            BitCask bitcask = new BitCask();
+            bitcask.start();
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
@@ -84,10 +86,9 @@ public class WeatherDataConsumer {
                         }
                         outputFile = null;
                     }
-                    BitCask bitcask = new BitCask();
-                    bitcask.start();
+
                     byte[] byteKey = record.key().getBytes();
-                    byte[] byteValue = record.key().getBytes();
+                    byte[] byteValue = record.value().getBytes();
                     bitcask.put(byteKey , byteValue);
                     System.out.println(bitcask.get(byteKey));
                 }
