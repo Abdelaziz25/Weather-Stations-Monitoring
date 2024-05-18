@@ -107,17 +107,17 @@ public class BitCask implements IBitCask {
         BitCaskEntry newEntry = new BitCaskEntry(currentTimestamp , key.length , value.length , key , value);
         long valuePosition = activeFileHandler.writeNewEntryToActiveFile(newEntry);
         String fileId = activeFileHandler.getFileId();
-        if(debug)       System.out.println("Successfully Added this Entry To BitCask File >> "+ newEntry.toString());
+        if(debug)       System.out.println("Successfully Added this Entry To BitCask File >> ");
 
         // add To In-Memory Directory
         KeyDirectoryEntry keyDirEntry = new KeyDirectoryEntry(currentTimestamp , value.length , valuePosition , fileId);
         keyDir.put(KEY, keyDirEntry);
-        if(debug)       System.out.println("Successfully Added this Entry To In Memory directory >> "+ keyDirEntry.toString());
+        if(debug)       System.out.println("Successfully Added this Entry To In Memory directory >> ");
 
         // add to Hint File
         HintFileEntry hintFileEntry = new HintFileEntry(currentTimestamp , key.length , value.length , valuePosition , key);
         hintFileHandler.writeToHintFile(fileId+".hint", hintFileEntry);
-        if(debug)       System.out.println("Successfully Added this Entry To Hint File >> "+ hintFileEntry.toString());
+        if(debug)       System.out.println("Successfully Added this Entry To Hint File >> ");
     }
 
     @Override

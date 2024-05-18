@@ -1,5 +1,6 @@
 package BaseCentralStation;
 import BitCask.BitCask;
+import Visualization.ConsolePrinter;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -51,7 +52,9 @@ public class WeatherDataConsumer {
 
         try {
             BitCask bitcask = new BitCask();
+            ConsolePrinter cp = new ConsolePrinter();
             bitcask.start();
+
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
@@ -77,6 +80,7 @@ public class WeatherDataConsumer {
                     byte[] byteArrayKey = record.key().getBytes();
                     byte[] byteArrayValue = record.value().getBytes();
                     bitcask.put(byteArrayKey , byteArrayValue);
+                    cp.printKeyDirectory(bitcask.getKeyDir());
                 }
             }
 
