@@ -50,6 +50,8 @@ public class WeatherDataConsumer {
 
 
         try {
+            BitCask bitcask = new BitCask();
+            bitcask.start();
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
@@ -72,9 +74,7 @@ public class WeatherDataConsumer {
                             recordCount = 0;
                         }
                     }
-                    BitCask bitcask = new BitCask();
-                    bitcask.start();
-                    byte[] byteArrayKey = record.value().getBytes();
+                    byte[] byteArrayKey = record.key().getBytes();
                     byte[] byteArrayValue = record.value().getBytes();
                     bitcask.put(byteArrayKey , byteArrayValue);
                 }

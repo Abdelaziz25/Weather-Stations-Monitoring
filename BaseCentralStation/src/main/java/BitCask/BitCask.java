@@ -54,7 +54,7 @@ public class BitCask implements IBitCask {
 
     private void scheduleCompaction() {
         long initialDelay = 0;
-        long period = 5; // Change this to the desired period (e.g., 1 for one hour)
+        long period = 1; // Change this to the desired period (e.g., 1 for one hour)
         TimeUnit timeUnit = TimeUnit.MINUTES; // Change this to the desired time unit
 
         scheduler.scheduleAtFixedRate(() -> {
