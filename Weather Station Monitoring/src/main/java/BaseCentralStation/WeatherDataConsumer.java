@@ -1,5 +1,6 @@
 package BaseCentralStation;
 
+import BitCask.BitCask;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -56,6 +57,8 @@ public class WeatherDataConsumer {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
                 for (ConsumerRecord<String, String> record : records) {
+                    System.out.println(record.value());
+
                     GenericRecord avroRecord = createAvroRecord(record.value(), avroSchema);
                     recordsBatch.add(avroRecord);
                     recordCount++;
@@ -81,8 +84,16 @@ public class WeatherDataConsumer {
                         }
                         outputFile = null;
                     }
+                    BitCask bitcask = new BitCask();
+                    bitcask.start();
+                    byte[] byteKey = record.key().getBytes();
+                    byte[] byteValue = record.key().getBytes();
+                    bitcask.put(byteKey , byteValue);
+                    System.out.println(bitcask.get(byteKey));
                 }
             }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         } finally {
             consumer.close();
             if (parquetWriter != null) {

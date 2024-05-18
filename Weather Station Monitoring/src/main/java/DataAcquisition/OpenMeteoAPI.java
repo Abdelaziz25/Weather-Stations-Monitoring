@@ -67,7 +67,7 @@ public class OpenMeteoAPI {
                         // Publish message to Kafka
                         if (!(random.nextDouble() <= 0.1)) {
                             JSONObject kafkaMessage = WeatherMessageBuilder.buildWeatherMessage(1, i+1, relativeHumidity, windSpeed, temperature, time);
-                            kafkaProducer.send(new ProducerRecord<>("Lab4", kafkaMessage.toString()));
+                            kafkaProducer.send(new ProducerRecord<>("Lab4", "1",kafkaMessage.toString()));
                         }
                         try {
                             Thread.sleep(1000);

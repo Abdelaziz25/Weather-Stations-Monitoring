@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="kafka-processor:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="208b2ca2-c17d-43fc-b065-a3202d08531a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station10.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station10.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station2.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station2.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station3.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station3.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station4.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station4.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station5.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station5.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station6.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station6.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station7.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station7.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station8.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station8.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weather Station Monitoring/station9.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weather Station Monitoring/station9.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-processor.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-processor.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2g9jn11yB4NZqGbt1gKFPwipBn3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="exceleditor.install" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="RainTriggerDetectionApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RainTriggerDetectionApp" />
+      <module name="kafka-processor" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.RainTriggerDetectionApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="208b2ca2-c17d-43fc-b065-a3202d08531a" name="Changes" comment="" />
+      <created>1715116852403</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715116852403</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
