@@ -78,7 +78,7 @@ public class BitCask implements IBitCask {
     @Override
     public void start() throws IOException {
         scheduleCompaction();
-        List<String> hintFilesPaths = fileHandler.listFilesWithExtension("src/main/java/Storage", "hint");
+        List<String> hintFilesPaths = fileHandler.listFilesWithExtension("/mnt/Storage", "hint");
 
         if(checkForNewStart(hintFilesPaths.isEmpty()))      return;
 

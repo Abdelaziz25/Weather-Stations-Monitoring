@@ -16,11 +16,13 @@ spec:
     spec:
       containers:
         - name: newserver
-          image: abdelaziz89/central-server:v14.0
+          image: abdelaziz89/central-server:v15.0
           ports:
             - containerPort: 8080
           volumeMounts:
             - mountPath: "/mnt/Volume"
+              name: parquet
+            - mountPath: "/mnt/Storage"
               name: parquet
       volumes:
         - name: parquet

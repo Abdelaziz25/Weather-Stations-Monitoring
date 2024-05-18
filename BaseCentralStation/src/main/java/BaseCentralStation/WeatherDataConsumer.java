@@ -1,4 +1,5 @@
 package BaseCentralStation;
+import BitCask.BitCask;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -71,6 +72,11 @@ public class WeatherDataConsumer {
                             recordCount = 0;
                         }
                     }
+                    BitCask bitcask = new BitCask();
+                    bitcask.start();
+                    byte[] byteArrayKey = record.value().getBytes();
+                    byte[] byteArrayValue = record.value().getBytes();
+                    bitcask.put(byteArrayKey , byteArrayValue);
                 }
             }
         } finally {

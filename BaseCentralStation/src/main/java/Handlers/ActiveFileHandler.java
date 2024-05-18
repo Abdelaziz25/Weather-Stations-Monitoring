@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 
 public class ActiveFileHandler {
     private final int MAX_SIZE = 100;
-    private final String initialFilePath ="src/main/java/Storage/activeFile";
+    private final String initialFilePath ="/mnt/Storage/activeFile";
     private final String copy = ".copy";
 
     private FileHandler fileHandler;

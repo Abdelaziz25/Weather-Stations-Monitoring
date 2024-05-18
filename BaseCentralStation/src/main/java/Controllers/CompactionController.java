@@ -14,7 +14,7 @@ import java.util.*;
 public class CompactionController {
 
 
-    private String mergePath = "src/main/java/Storage/activeFile";
+    private String mergePath = "/mnt/Storage/activeFile";
     private String hintExtension = ".hint";
     private String copyExtension = ".copy";
 
@@ -120,7 +120,7 @@ public class CompactionController {
 
 
     public void compact(HashMap<String , KeyDirectoryEntry> originalKeyDirectory) throws IOException {
-        List<String> filePaths = fileHandler.listFilesWithExtension("src/main/java/Storage/","copy");
+        List<String> filePaths = fileHandler.listFilesWithExtension("/mnt/Storage/","copy");
 
         if(filePaths.size() < MIN_COMPACTED_FILES) {
             System.out.println("No need for compaction");
