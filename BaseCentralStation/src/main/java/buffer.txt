@@ -1,0 +1,256 @@
+
+Class BitCaskEntry
+//    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+//        this.timeStamp = in.readLong();
+//        this.keyLength = in.readInt();
+//        this.valueLength = in.readInt();
+//
+//        byte[] keyBytes = new byte[this.keyLength];
+//        in.readFully(keyBytes,16,keyLength);
+//        this.key = keyBytes;
+//
+//        byte[] valueBytes = new byte[this.valueLength];
+//        in.readFully(valueBytes,16+keyLength,valueLength);
+//        this.value = valueBytes;
+//    }
+
+
+Class BitCask >> start function
+//        int extentionIndex = currentActiveFile.lastIndexOf(".");
+//        int counter;
+//
+
+//        Pattern pattern = Pattern.compile("activeFile(\\d+)\\.");
+//        Matcher matcher = pattern.matcher(currentActiveFile);
+//
+//        if (matcher.find()) {
+//            // Extract the number and increment it
+//            String numberStr = matcher.group(1);
+//            counter = Integer.parseInt(numberStr) + 1;
+//        } else {
+//            counter = 0;
+//        }
+//
+//
+//        currentActiveFile = currentActiveFile.substring(0, extentionIndex);
+
+Class FileHandler
+
+////    private byte[] getSerializedEntry(Object entry) throws IOException {
+////        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+////        ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+////        objectStream.writeObject(entry);
+////        return byteStream.toByteArray();
+////    }
+////
+////
+////
+////    public long writeEntryToFile(String filePath, Object entry) throws IOException {
+////        byte [] serializedEntry = getSerializedEntry(entry);
+////        RandomAccessFile file = new RandomAccessFile(filePath, "rw");
+////        long valPos = file.length();
+////        file.seek(valPos);
+////        file.write(serializedEntry);
+////        return valPos;
+////    }
+//
+//
+//
+//    public List<BitCaskEntry> readAllEntriesFromFile(String filePath) throws IOException, ClassNotFoundException {
+//        List<BitCaskEntry> entries = new ArrayList<>();
+//        BitCaskEntryHandler bitCaskHandler = new BitCaskEntryHandler();
+//
+//        RandomAccessFile file = new RandomAccessFile(filePath, "r");
+//        long fileLength = file.length();
+//        long currentPtr = 0;
+//
+//        while (currentPtr < fileLength) {
+//            BitCaskEntry entry = bitCaskHandler.readBitCaskEntryFromFile(filePath, currentPtr);
+//            currentPtr = bitCaskHandler.getFilePointer();
+//
+//            System.out.println("Entry Readed from file  >>> "+ entry.toString());
+//            entries.add(entry);
+//        }
+//
+//        return entries;
+//    }
+//
+
+
+Class Compactor >> function get Most Recent Entries
+        for(File file : files){
+            String filePath = file.getPath();
+            List<BitCaskEntry> entries = fileHandler.readAllEntriesFromFile(filePath);
+
+            if(debug)       System.out.println("File in path >> " + filePath + " >>  has entries = " + entries.size());
+
+            for(BitCaskEntry entry : entries) {
+                if (!mostRecentEntries.containsKey(entry.getKey().toString())) {
+                    mostRecentEntries.put(entry.getKey().toString(), entry);
+                } else {
+
+                    BitCaskEntry existingEntry = mostRecentEntries.get(entry.getKey().toString());
+                    if (entry.getTimeStamp() > existingEntry.getTimeStamp()) {
+                        if(debug)       System.out.println("Enstance most updated than me >> ");
+                        mostRecentEntries.put(entry.getKey().toString(), entry); // Replace with more recent entry
+                    }
+                }
+            }
+        }
+
+
+//    public void startMerge() throws IOException, ClassNotFoundException {
+//        HashMap<String, BitCaskEntry> mostRecentEntries = getMostRecentEntriesFromFile();
+//
+//        if(debug) this.cp.printCompactDictionary(mostRecentEntries);
+//
+//        Random random = new Random();
+//        String mergedPath = "src/Storage/merged" + String.valueOf(random.nextInt(1000));
+//        RandomAccessFile mergedFile = new RandomAccessFile(mergedPath, "rw");
+//        String hintPath = mergedPath+"hint";
+//        RandomAccessFile hintFile = new RandomAccessFile(hintPath, "rw");
+//
+//        for (String key : mostRecentEntries.keySet()){
+//                BitCaskEntry entry = mostRecentEntries.get(key);
+//                long entryPos = mergedFile.getFilePointer();
+//                mergedFile.write(entry.toByteArray());
+//
+//                HintFileEntry hintEntry = new HintFileEntry(entry.getTimeStamp() , entry.getKeyLength() , entry.getValueLength() , entryPos , entry.getKey() );
+//                hintFile.write(hintEntry.toByteArray());
+//        }
+//
+////        deleteMergedFiles(files);
+//
+//        mergedFile.close();
+//        hintFile.close();
+//    }
+
+
+
+MAiNNNNN
+
+
+//        byte[] key1 = "key1".getBytes();
+//        byte[] value1 = "val1dgawuiwuory".getBytes();
+//
+//        byte[] key2 = "key2".getBytes();
+//        byte[] value2 = "val2yreeeeeeeeeeeeeeewuiytiw".getBytes();
+//
+//        byte[] key3 = "key3".getBytes();
+//        byte[] value3 = "val3BBBBBBBBBBBBBBBBBBBBBBBB".getBytes();
+//
+//        byte[] key4 = "key4".getBytes();
+//        byte[] value4 = "val4VGRYRYRTUTITY".getBytes();
+//
+//        byte[] key5 = "key5".getBytes();
+//        byte[] value5 = "val5VVVVVVVVVVVVVV22".getBytes();
+//
+//        byte[] key6 = "key6".getBytes();
+//        byte[] value6 = "val658329607Q3063".getBytes();
+//
+//        byte[] key7 = "key7".getBytes();
+//        byte[] value7 = "val70685T5342122".getBytes();
+//
+//        byte[] key8 = "key8".getBytes();
+//        byte[] value8 = "val821476125026".getBytes();
+//
+//        byte[] key9 = "key9".getBytes();
+//        byte[] value9 = "val92AGJHGSGIS".getBytes();
+//
+//        byte[] key10 = "key10".getBytes();
+//        byte[] value10 = "val10VVVVVVVVVVVV22".getBytes();
+//
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key2 , value2);
+//        bitcask.put(key3 , value3);
+//        bitcask.put(key4 , value4);
+//        bitcask.put(key5 , value5);
+//        bitcask.put(key6 , value6);
+//        bitcask.put(key7 , value7);
+//        bitcask.put(key8 , value8);
+//        bitcask.put(key9 , value9);
+//        bitcask.put(key10 , value10);
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key2 , value1);
+//        bitcask.put(key3 , value1);
+//        bitcask.put(key4 , value1);
+//        bitcask.put(key5 , value1);
+//
+
+
+
+//        bitcask.start();
+
+//        bitcask.get(key1);
+//        bitcask.get("laaaaaaaaa".getBytes());
+
+
+//        System.out.println(bitcask.get(key1));
+//        bitcask.get("hhhhhhhhhhhhhhhh".getBytes());
+//
+//
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key2, value2);
+//        bitcask.put(key3 , value3);
+//        bitcask.put(key4 , value4);
+
+
+//        bitcask.put(key1 , value1);
+//        bitcask.put(key1 , value2);
+//        bitcask.put(key1 , value3);
+//
+//
+//        System.out.println("Key Directory >>>>");
+//        cp.printKeyDirectory(bitcask.getKeyDir());
+//        System.out.println("-------------------------------------------------------------------------------------------------------------");
+//
+//
+////        bitcask.compact();
+////        cp.printKeyDirectory(bitcask.getKeyDir());
+////
+////        bitcask.get(key1);
+//
+////        bitcask.get(key1);
+////        bitcask.get(key2);
+
+
+Bit Cask Start
+       if (hintFilesPaths.isEmpty()) {
+            if (debug) System.out.println("No hint files found it's a new Start");
+            init();
+            scheduleCompaction();
+            return;
+        }
+
+
+
+Construct KeyDirectory
+
+    private void constructKeyDirectory(List<String> hintFilesPaths) throws IOException {
+        this.keyDir = new HashMap<>();
+        String currentActiveHintFile = "";
+        ActiveFileInfo activeFileInfo = new ActiveFileInfo("",-1);
+
+        // read Hint File and append in hashMap
+        for (String hintFile : hintFilesPaths) {
+            this.keyDir = bitCaskBuilder.constructKeyDirectoryFromHintFile(hintFile, keyDir);
+
+            ActiveFileInfo tempActiveFileInfo = this.fileHandler.getFilePathAndCounter(hintFile);
+
+            if(debug) System.out.println("Current ActiveFileInfo: " + tempActiveFileInfo.getFilePath() +" Counter "+ tempActiveFileInfo.getCounter());
+
+            if(tempActiveFileInfo.getCounter() > activeFileInfo.getCounter()) {
+                activeFileInfo = tempActiveFileInfo;
+            }
+        }
+        activeFileHandler = new ActiveFileHandler(activeFileInfo.getFilePath(), activeFileInfo.getCounter());
+
+        if(debug){
+            System.out.println("KEY DIRECTORY AFTER CONSTRUCTION size = " + this.keyDir.size());
+            this.cp.printKeyDirectory(this.keyDir);
+            System.out.println("Current Active File >> " + activeFileInfo.getFilePath());
+            System.out.println("Counter >> " + activeFileInfo.getCounter());
+        }
+
+
+    }
