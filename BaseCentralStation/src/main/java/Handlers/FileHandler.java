@@ -54,7 +54,7 @@ public class FileHandler {
         try {
             // Copy file from source to target
             Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("File copied from " + sourcePath + " to " + targetPath);
+//            System.out.println("File copied from " + sourcePath + " to " + targetPath);
         } catch (IOException e) {
             System.err.println("Failed to copy file: " + e.getMessage());
         }

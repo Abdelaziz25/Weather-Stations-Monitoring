@@ -25,7 +25,7 @@ public class CompactionController {
     private FileHandler fileHandler;
     private ConsolePrinter cp;
     private BitCaskEntryHandler bitCaskEntryHandler;
-    private boolean debug = true;
+    private boolean debug = false;
 
     public CompactionController() {
         this.fileHandler = new FileHandler();

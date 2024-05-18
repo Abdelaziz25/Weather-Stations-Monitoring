@@ -79,8 +79,10 @@ public class WeatherDataConsumer {
                     bitcask.put(byteArrayKey , byteArrayValue);
                 }
             }
+
         } finally {
             consumer.close();
+
         }
     }
 

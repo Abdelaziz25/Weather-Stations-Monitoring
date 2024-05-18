@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ActiveFileHandler {
-    private final int MAX_SIZE = 100;
+    private final int MAX_SIZE = 2000;
     private final String initialFilePath ="/mnt/Storage/activeFile";
     private final String copy = ".copy";
 
@@ -24,7 +24,7 @@ public class ActiveFileHandler {
     private long nextFilePosition;
     private int fileCounter;
     private TypesConverter converter;
-    private boolean debug = true;
+    private boolean debug = false;
 
     public ActiveFileHandler(String activePath , int counter) throws IOException {
         this.converter = new TypesConverter();
