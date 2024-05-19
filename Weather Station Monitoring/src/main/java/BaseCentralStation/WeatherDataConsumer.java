@@ -1,6 +1,7 @@
 package BaseCentralStation;
 
 import BitCask.BitCask;
+import ElasticsearchAndKibana.ParquetReaderExample;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class WeatherDataConsumer {
-    private static final int BATCH_SIZE = 100;
+    private static final int BATCH_SIZE = 50;
 
     public static void main(String[] args) throws IOException {
         Properties props = new Properties();
@@ -51,10 +52,11 @@ public class WeatherDataConsumer {
         int fileIndex = 0;
         HadoopOutputFile outputFile = null;
         ParquetWriter<GenericRecord> parquetWriter = null;
-
+        boolean flag = false;
         try {
             BitCask bitcask = new BitCask();
             bitcask.start();
+            ParquetReaderExample parquetReader  = new ParquetReaderExample();
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
@@ -65,10 +67,12 @@ public class WeatherDataConsumer {
                     recordsBatch.add(avroRecord);
                     recordCount++;
                     System.out.println(recordCount);
+                    String path = "C:\\Users\\abdel\\Desktop\\Project" + fileIndex + ".parquet";
                     if (recordCount >= BATCH_SIZE) {
+
                         // Write the batch to a Parquet file
                         if (outputFile == null) {
-                            outputFile = HadoopOutputFile.fromPath(new Path("C:\\Users\\abdel\\Desktop\\Project" + fileIndex + ".parquet"), conf);
+                            outputFile = HadoopOutputFile.fromPath(new Path(path), conf);
                             fileIndex++;
                             parquetWriter = AvroParquetWriter.<GenericRecord>builder(outputFile)
                                     .withSchema(avroSchema)
@@ -78,15 +82,21 @@ public class WeatherDataConsumer {
                         for (GenericRecord batchRecord : recordsBatch) {
                             parquetWriter.write(batchRecord);
                         }
+
                         recordsBatch.clear();
                         recordCount = 0;
                         if (parquetWriter != null) {
                             parquetWriter.close(); // Close Parquet writer
                             parquetWriter = null;
+                            flag = true;
                         }
                         outputFile = null;
                     }
-
+                    if(flag)
+                    {
+                        ParquetReaderExample.readParquetFile(path);
+                        flag = false;
+                    }
                     byte[] byteKey = record.key().getBytes();
                     byte[] byteValue = record.value().getBytes();
                     bitcask.put(byteKey , byteValue);
