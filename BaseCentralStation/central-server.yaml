@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: newserver
-          image: abdelaziz89/central-server:v19.0
+          image: abdelaziz89/central-server:v21.0
           ports:
             - containerPort: 8080
           volumeMounts:

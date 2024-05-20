@@ -1,5 +1,6 @@
 package BaseCentralStation;
 import BitCask.BitCask;
+import ElasticsearchAndKibana.ParquetReaderExample;
 import Visualization.ConsolePrinter;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
@@ -119,6 +120,7 @@ public class WeatherDataConsumer {
             if (parquetWriter != null) {
                 parquetWriter.close(); // Close Parquet writer outside the loop
             }
+             ParquetReaderExample.readParquetFile(parquetFilePath);
             fileIndex++;
     }
 }

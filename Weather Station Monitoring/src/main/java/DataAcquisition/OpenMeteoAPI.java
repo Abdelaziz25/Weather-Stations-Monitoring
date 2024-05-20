@@ -21,7 +21,7 @@ public class OpenMeteoAPI {
     public OpenMeteoAPI(KafkaProducer<String, String> kafkaProducer) {
         this.kafkaProducer = kafkaProducer;
     }
-
+    public int seq =1 ;
     public void fetchAndPublishWeatherData(int StationId,double latitude, double longitude) {
         try {
             while(true)
@@ -67,11 +67,12 @@ public class OpenMeteoAPI {
                             long time = timeArray.getLong(i); // Assuming time is in Unix timestamp format
                             // Publish message to Kafka
                             if (!(random.nextDouble() <= 0.1)) {
-                                JSONObject kafkaMessage = WeatherMessageBuilder.buildWeatherMessage(StationId, i+1, relativeHumidity, windSpeed, temperature, time);
+                                JSONObject kafkaMessage = WeatherMessageBuilder.buildWeatherMessage(StationId, seq, relativeHumidity, windSpeed, temperature, time);
                                 System.out.println(kafkaMessage);
                                 kafkaProducer.send(new ProducerRecord<>("Project", Integer.toString(StationId),kafkaMessage.toString()));
                                 kafkaProducer.flush();
                             }
+                            seq++;
                             try {
                                 TimeUnit.SECONDS.sleep(1);
                             } catch (InterruptedException e) {

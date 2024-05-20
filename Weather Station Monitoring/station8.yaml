@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: station8
-          image: abdelaziz89/weather-station:v1.0
+          image: abdelaziz89/weather-station:v2.0
           ports:
             - containerPort: 8080
           env:
